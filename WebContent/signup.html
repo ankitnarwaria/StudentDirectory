@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>AADHAR REGISTRATION</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+ 
+  
+  <style>
+  .jumbotron{
+  	padding: 1rem 1rem 1rem 1rem;  
+  	margin-bottom: 5px;
+  }
+  .bottom{
+  	padding: 0rem 1rem 1rem 1rem;
+  }
+  .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    .form-row{
+    	font-size: 10px;
+    }
+    .form-control{
+    	font-size: 10px;
+    }
+    .btn{
+    font-size: 10px;
+    }
+    .input-group-text{
+    font-size: 10px;
+    }
+  </style>
+  <script type="text/javascript">
+	function submitForm() {
+		var nid = document.getElementById("name");
+          if (!nid.value) {
+			var messageContainer = document.getElementById("messageContainer");
+			messageContainer.style.display = "block";
+			messageContainer.innerHTML  = "Please provide name"
+			nid.focus();
+			return;
+		}
+		var Email = document.getElementById("email");
+		if (!Email.value) {
+			var messageContainer = document.getElementById("messageContainer");
+			messageContainer.style.display = "block";
+			messageContainer.innerHTML  = "Please provide Email"
+			lastName.focus();
+			return;
+		}
+		var Password= document.getElementById("password");
+		if (!Password.value) {
+			var messageContainer = document.getElementById("messageContainer");
+			messageContainer.style.display = "block";
+			messageContainer.innerHTML  = "Please provide password"
+			lastName.focus();
+			return;
+		}
+		document.forms[0].submit();
+	}
+</script>
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">			
+			<div class="float-right"><a href="/StudentDirectory/login.html">Login</a></div>			
+			<div ><div class="text-left">
+			  <img src="img/college.jpg" class="rounded" alt="..." height="50px;"> Student Directory
+			</div>
+			</div>
+		</div>
+
+		<div class="row bottom" style="height: 400px;">
+			
+			<div class="col-sm-12 rounded" style="background: #e9ecef; padding-top: 10px; ">		
+				<div>
+				<p>Signup Here</p>
+					</div>				
+				<div class="alert alert-danger" role="alert" id="messageContainer" style="display: none;">				  
+				</div>
+
+
+				<form class="needs-validation" action="./signup" method="post" novalidate>
+					<div class="form-row">
+						<div class="col-md-4 mb-3">
+							<label for="validationTooltip01">Name</label> <input
+								type="text" class="form-control" id="name"
+								placeholder="Name" name="name" required>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="validationTooltip02">Email</label> <input
+								type="text" class="form-control" id="email"
+								placeholder="Email"  name="email" required>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="validationTooltipUsername">Username</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"
+										id="validationTooltipUsernamePrepend">@</span>
+								</div>
+								<input type="text" class="form-control"
+									id="validationTooltipUsername" placeholder="Username"
+									aria-describedby="validationTooltipUsernamePrepend" required>
+								
+							</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col-md-6 mb-3">
+							<label for="validationTooltip03">City</label> <input type="text"
+								class="form-control" id="validationTooltip03" placeholder="City"
+								required>
+						</div>
+						<div class="col-md-3 mb-3">
+							<label for="validationTooltip04">Password</label> <input type="password"
+								class="form-control" id="password"
+								placeholder="password" name="password" required>
+							</div>						
+						<div class="col-md-3 mb-3">
+							<label for="validationTooltip05">Zip</label> <input type="text"
+								class="form-control" id="validationTooltip05" placeholder="Zip"
+								required>
+						</div>
+						</div>
+					<button class="btn btn-primary" type="button" onclick="submitForm()">Submit form</button>
+				</form>
+			</div>
+
+		</div>
+
+	</div>
+
+</body>
+</html>
