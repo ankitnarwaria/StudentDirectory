@@ -25,20 +25,20 @@
   <script type="text/javascript">
   
 	function submitForm() {
-		var nid = document.getElementById("lname");
+		var nid = document.getElementById("username");
 		if (!nid.value) {
 			var messageContainer = document.getElementById("messageContainer");
 			messageContainer.style.display = "block";
-			messageContainer.innerHTML  = "Please provide name"
+			messageContainer.innerHTML  = "Please provide username"
 			nid.focus();
 			return;
 		}
-		var lastName = document.getElementById("pwd");
-		if (!lastName.value) {
+		var password = document.getElementById("password");
+		if (!password.value) {
 			var messageContainer = document.getElementById("messageContainer");
 			messageContainer.style.display = "block";
 			messageContainer.innerHTML  = "Please provide password"
-			lastName.focus();
+			password.focus();
 			return;
 		}
 		document.forms[0].submit();
@@ -48,9 +48,9 @@
 <body>
 	<div class="container">
 		<div class="jumbotron">			
-			<div class="float-right"><a href="/StudentDirectory/signup.html">SignUp</a></div>			
+			<div class="float-right"><a href="/StudentDirectory/signup.jsp">SignUp</a></div>			
 			<div ><div class="text-left">
-			  <img src="img/college.jpg" class="rounded" alt="..." height="50px;"> Student Directory
+			  <img src="img/college.jpg" class="rounded" alt="..." height="50px;"> Student Directory			  
 			</div>
 			</div>
 		</div>
@@ -60,21 +60,21 @@
 			<div class="col-sm-8 rounded" style="background: #e9ecef; padding-top: 10px; ">		
 				<div>
 				<p>LOGIN HERE</p>
+				${loginError}
 				</div>				
 				<div class="alert alert-danger" role="alert" id="messageContainer" style="display: none;">				  
 				</div>
-			     <% String s=(String)request.getAttribute("msg"); %>
-			     <% System.out.println(s); %>
+			    
 				
 				<form action="./login" method="POST" name="adharFOrm">
 					<div class="row">
 						<div class="col-4"></div>
 						<div class="col-4">
 					  
-							<input type="text" class="form-control" placeholder="Name..."
-								name="username" id="lname"> <br> <input type="password"
+							<input type="text" class="form-control" placeholder="Username..."
+								name="username" id="username"> <br> <input type="password"
 								class="form-control" placeholder="password..." name="password"
-								id="pwd"> <br> <input type="button" value="Login"
+								id="password"> <br> <input type="button" value="Login"
 								onclick="submitForm()">
 						</div>
 						<div class="col-4"></div>						

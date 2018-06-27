@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ankit.model.User;
+import com.ankit.model.dao.UserDao;
 
-
-@WebServlet("/signup")
 public class SignUp extends HttpServlet {
 	Connection connection;
 
@@ -23,24 +23,26 @@ public class SignUp extends HttpServlet {
 		connection = new DatabaseConnection().createConnection();
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-		String name=request.getParameter("name");
-		String email=request.getParameter("email");
-		String pwd=request.getParameter("password");
-		try {
-			PreparedStatement ps=connection.prepareStatement("insert into userinfo values(?,?,?)");
-			ps.setString(1,name);
-			ps.setString(2, email);
-			ps.setString(3, pwd);
-			ps.executeUpdate();
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+
+		User user = new User();
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setEmail(email);
+
+		UserDao userdao = new UserDao(connection);
+
+		int i = userdao.setUser(user);
+
+		if (i == 1) {
+			getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 		}
-		response.sendRedirect("./home.html");
-		
+
 	}
 
 }

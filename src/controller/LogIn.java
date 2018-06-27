@@ -12,38 +12,39 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ankit.model.User;
 import com.ankit.model.dao.UserDao;
 
-
-
- 
-@WebServlet("/login")
 public class LogIn extends HttpServlet {
+	Connection connection;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-     
-	PrintWriter out=response.getWriter();
-		
-		String username=request.getParameter("username");
-		String password=request.getParameter("password");
-		
-		
-	   UserDao userdao= new UserDao();
-	   User user=userdao.getUser(username, password);
-	      
-	   if(user!=null)
-	   {
-		  response.sendRedirect("./home.html");
-	   }
-	   else
-	   { request.setAttribute("msg","invalid username/password" );
-		getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
-		   
-	   }
+	@Override
+	public void init() {
+		connection = new DatabaseConnection().createConnection();
 	}
-	 
-		
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+                                                                 
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+
+		UserDao userdao = new UserDao(connection);
+		User user = userdao.getUser(username, password);
+		if (user != null) {
+			session.setAttribute("usertype", user.getUsertype());
+			session.setAttribute("userfullName", user.getFname() + " " + user.getLname());
+			session.setAttribute("username", username);
+			request.setAttribute("pageBody", "dashboard.jsp");
+			getServletContext().getRequestDispatcher("/WEB-INF/jsp/template.jsp").forward(request, response);
+		} else {
+			request.setAttribute("loginError", "invalid username/password");
+			getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+
+		}
+	}
 
 }
